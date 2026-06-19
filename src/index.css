@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────── Base Layer ─────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    @apply antialiased;
+  }
+
+  body {
+    @apply font-sans bg-gray-950 text-gray-100 transition-colors duration-300;
+    background-image: radial-gradient(ellipse at 20% 20%, rgba(16,185,129,0.08) 0%, transparent 50%),
+                      radial-gradient(ellipse at 80% 80%, rgba(59,130,246,0.06) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  body.light {
+    @apply bg-gray-50 text-gray-900;
+    background-image: radial-gradient(ellipse at 20% 20%, rgba(16,185,129,0.04) 0%, transparent 50%),
+                      radial-gradient(ellipse at 80% 80%, rgba(59,130,246,0.03) 0%, transparent 50%);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-eco-600/50 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-eco-500; }
+}
+
+/* ─────────────── Component Layer ─────────────── */
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    @apply relative backdrop-blur-md border rounded-2xl;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  }
+
+  .glass-card-light {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+    @apply backdrop-blur-md border rounded-2xl;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #4ade80, #22d3ee);
+  }
+
+  .gradient-text-warm {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #fbbf24, #f87171);
+  }
+
+  /* Eco button */
+  .btn-eco {
+    @apply relative overflow-hidden font-semibold rounded-xl px-6 py-3 transition-all duration-300 cursor-pointer;
+    background: linear-gradient(135deg, #16a34a, #0d9488);
+    @apply text-white shadow-lg hover:shadow-glow-green hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-eco::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, #22c55e, #14b8a6);
+  }
+  .btn-eco:hover::before { @apply opacity-100; }
+  .btn-eco span { @apply relative z-10; }
+
+  .btn-ocean {
+    @apply relative overflow-hidden font-semibold rounded-xl px-6 py-3 transition-all duration-300 cursor-pointer;
+    background: linear-gradient(135deg, #1d4ed8, #0891b2);
+    @apply text-white shadow-lg hover:shadow-glow-blue hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply font-semibold rounded-xl px-6 py-3 transition-all duration-300 cursor-pointer;
+    @apply border border-white/20 text-white hover:bg-white/10;
+  }
+
+  /* Input styles */
+  .input-eco {
+    @apply w-full rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 outline-none;
+    @apply bg-white/5 border border-white/10 text-white placeholder-gray-500;
+    @apply focus:border-eco-500/60 focus:ring-2 focus:ring-eco-500/20 focus:bg-white/8;
+  }
+
+  .input-eco-light {
+    @apply w-full rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 outline-none;
+    @apply bg-white border border-gray-200 text-gray-900 placeholder-gray-400;
+    @apply focus:border-eco-500 focus:ring-2 focus:ring-eco-500/20;
+  }
+
+  /* Section label */
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-eco-400;
+  }
+
+  /* Stat badge */
+  .stat-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  /* Nav link */
+  .nav-link {
+    @apply flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200;
+    @apply text-gray-400 hover:text-white hover:bg-white/8;
+  }
+  .nav-link.active {
+    @apply text-eco-400 bg-eco-500/10;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply h-2 rounded-full overflow-hidden bg-white/10;
+  }
+  .progress-fill {
+    @apply h-full rounded-full transition-all duration-1000 ease-out;
+    background: linear-gradient(90deg, #16a34a, #0d9488);
+  }
+
+  /* Toast */
+  .toast {
+    @apply fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-glass text-sm font-medium;
+    @apply backdrop-blur-md border border-white/10;
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  /* Chatbot bubble */
+  .chat-bubble-bot {
+    @apply rounded-2xl rounded-tl-sm px-4 py-3 text-sm max-w-xs;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    @apply text-gray-100;
+  }
+  .chat-bubble-user {
+    @apply rounded-2xl rounded-tr-sm px-4 py-3 text-sm max-w-xs text-white;
+    background: linear-gradient(135deg, #16a34a, #0d9488);
+  }
+}
+
+/* ─────────────── Utility Layer ─────────────── */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ─────────────── Chart overrides ─────────────── */
+.recharts-tooltip-wrapper {
+  @apply !outline-none;
+}
+.recharts-default-tooltip {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(8px) !important;
+}
+.recharts-tooltip-label {
+  color: #e2e8f0 !important;
+  font-weight: 600 !important;
+}
+.recharts-tooltip-item {
+  color: #94a3b8 !important;
+}
+
+/* ─────────────── Light mode overrides ─────────────── */
+.light .glass-card {
+  background: rgba(255,255,255,0.7);
+  border-color: rgba(255,255,255,0.8);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.light .input-eco {
+  @apply bg-white border-gray-200 text-gray-900 placeholder-gray-400;
+}
+.light .nav-link {
+  @apply text-gray-600 hover:text-gray-900 hover:bg-gray-100;
+}
+.light .nav-link.active {
+  @apply text-eco-600 bg-eco-50;
+}
+.light .recharts-default-tooltip {
+  background: rgba(255,255,255,0.98) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+.light .recharts-tooltip-label { color: #1e293b !important; }
+.light .recharts-tooltip-item { color: #475569 !important; }
+
+/* ─────────────── Particle / orb background ─────────────── */
+.orb {
+  @apply absolute rounded-full blur-3xl opacity-20 pointer-events-none;
+  animation: float 8s ease-in-out infinite;
+}
+.orb-green {
+  background: radial-gradient(circle, #16a34a, transparent);
+}
+.orb-blue {
+  background: radial-gradient(circle, #1d4ed8, transparent);
+  animation-delay: -3s;
+}
+.orb-teal {
+  background: radial-gradient(circle, #0d9488, transparent);
+  animation-delay: -6s;
+}
+
+/* ─────────────── Hero particle canvas ─────────────── */
+#hero-canvas {
+  @apply absolute inset-0 w-full h-full pointer-events-none;
+}
